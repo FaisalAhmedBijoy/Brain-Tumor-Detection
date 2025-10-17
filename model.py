@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 from transformers import ViTForImageClassification, ViTConfig
+from configuration import Config
+config = Config()
 
 class BrainTumorViT(nn.Module):
     def __init__(self, num_classes=4, pretrained=True):
@@ -9,13 +11,13 @@ class BrainTumorViT(nn.Module):
         if pretrained:
             # Load pretrained model from Hugging Face
             self.vit = ViTForImageClassification.from_pretrained(
-                'google/vit-base-patch16-224',
+                config.VISION_TRSANSFORMER_MODEL,
                 num_labels=num_classes,
                 ignore_mismatched_sizes=True  # Important when changing number of classes
             )
         else:
             # Initialize a new ViT model from scratch
-            config = ViTConfig(
+            vit_config = ViTConfig(
                 image_size=224,
                 patch_size=16,
                 num_channels=3,
@@ -25,7 +27,7 @@ class BrainTumorViT(nn.Module):
                 num_attention_heads=12,
                 intermediate_size=3072,
             )
-            self.vit = ViTForImageClassification(config)
+            self.vit = ViTForImageClassification(vit_config)
 
     def forward(self, x):
         outputs = self.vit(x)

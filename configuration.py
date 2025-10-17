@@ -7,5 +7,6 @@ class Config:
     WEIGHT_DECAY = 1e-2
     NUM_EPOCHS = 2
     SAVE_DIR = 'checkpoints'
+    VISION_TRSANSFORMER_MODEL = 'google/vit-base-patch16-224'
 
 

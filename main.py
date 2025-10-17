@@ -1,5 +1,5 @@
-import torch
 import os
+import torch
 from model import get_model
 from data_processing import get_dataloaders
 from train import train_model
