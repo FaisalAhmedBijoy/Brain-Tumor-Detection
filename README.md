@@ -13,19 +13,19 @@ The dataset consists of MRI scans categorized into four classes:
 ## Dataset Sample
 - Glioma
 
-   ![](data/Testing/glioma/Te-gl_0010.jpg)
+   ![](logs/samples/glioma/Te-gl_0010.jpg)
 
 - Meningioma
 
-   ![](data/Testing/meningioma/Te-me_0010.jpg)
+   ![](logs/samples/meningioma/Te-me_0010.jpg)
 
 - Pituitary
 
-   ![](data/Testing/pituitary/Te-pi_0010.jpg)
+   ![](logs/samples/pituitary/Te-pi_0010.jpg)
 
 - No Tumor
 
-   ![](data/Testing/notumor/Te-no_0010.jpg)
+   ![](logs/samples/notumor/Te-no_0010.jpg)
 
 ### Data Statistics
 ```
@@ -228,16 +228,18 @@ The model is evaluated using:
    - Per-class accuracy
 
  ```bash
+            
+
                   precision    recall  f1-score   support
 
-         glioma       0.99      0.96      0.97       300
-     meningioma       0.96      0.96      0.96       306
-        notumor       0.97      1.00      0.98       405
-      pituitary       0.98      0.98      0.98       300
+         glioma       1.00      0.99      1.00       300
+     meningioma       0.99      1.00      0.99       306
+        notumor       1.00      1.00      1.00       405
+      pituitary       1.00      0.99      1.00       300
 
-      accuracy                            0.98      1311
-      macro avg       0.98      0.97      0.97      1311
-   weighted avg       0.98      0.98      0.98      1311
+       accuracy                           1.00      1311
+      macro avg       1.00      1.00      1.00      1311
+   weighted avg       1.00      1.00      1.00      1311
 
  ```
 
@@ -273,4 +275,14 @@ predictor = BrainTumorPredictor(model_dir="checkpoints/best_model")
 result = predictor.predict_image("path/to/image.jpg", return_probs=True)
 print(f"Predicted class: {result[0]}")
 print("Class probabilities:", result[1])
+```
+
+Output Format: 
+```
+Predicted class: glioma
+Class probabilities:
+glioma: 0.9950
+meningioma: 0.0012
+notumor: 0.0035
+pituitary: 0.0003
 ```
