@@ -1,6 +1,6 @@
 # Brain Tumor Classification with Vision Transformer
 
-This project implements a Vision Transformer (ViT) model for brain tumor classification using PyTorch. The model classifies brain MRI images into four categories: glioma, meningioma, no tumor, and pituitary tumor using transfer learning from the pretrained google/vit-base-patch16-224 model.
+This project implements a Vision Transformer (ViT) model for brain tumor classification using PyTorch. The model classifies brain MRI images into four categories: glioma, meningioma, no tumor, and pituitary tumor using transfer learning from the pretrained [google/vit-base-patch16-224](https://huggingface.co/google/vit-base-patch16-224) model.
 
 ## Dataset Overview
 
