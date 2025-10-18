@@ -218,11 +218,15 @@ During training, the following metrics are tracked:
 
 ### Evaluation Metrics
 The model is evaluated using:
+   ```bash
+   python evaluations.py
+   ```
 1. **Classification Report**:
    - Precision
    - Recall
    - F1-Score
    - Per-class accuracy
+
  ```bash
                   precision    recall  f1-score   support
 
@@ -241,7 +245,6 @@ The model is evaluated using:
 
    ![](logs/confusion_matrix.png)
 
-3. **Overall Accuracy**
 
 ### Output and Artifacts
 The training process generates:
