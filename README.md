@@ -10,6 +10,7 @@ The dataset consists of MRI scans categorized into four classes:
 - Pituitary: Tumors that affect the pituitary gland
 - No Tumor: Normal brain MRI scans
 
+The dataset was collected from [Kaggle](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset) and the name of the dataset was `Brain Tumor MRI Dataset`. 
 ## Dataset Sample
 - Glioma
 
