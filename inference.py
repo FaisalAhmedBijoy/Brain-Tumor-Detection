@@ -2,13 +2,20 @@ import os
 import torch
 from PIL import Image
 import torch.nn.functional as F
-from model import BrainTumorViT
+from transformers import ViTForImageClassification, ViTConfig
 import torchvision.transforms as transforms
 
 class BrainTumorPredictor:
     def __init__(self, model_dir, device='cuda' if torch.cuda.is_available() else 'cpu'):
         self.device = device
-        self.model = BrainTumorViT.load_model(model_dir, device)
+        
+        # Load the model directly using transformers
+        self.model = ViTForImageClassification.from_pretrained(
+            model_dir,
+            num_labels=4,  # Explicitly specify 4 classes
+            ignore_mismatched_sizes=True  # This is important for loading
+        )
+        self.model.to(device)
         self.model.eval()
         
         # Define class labels
@@ -31,6 +38,9 @@ class BrainTumorPredictor:
         Returns:
             predicted class and probabilities (if return_probs=True)
         """
+        if not os.path.exists(image_path):
+            raise FileNotFoundError(f"Image not found at {image_path}")
+            
         # Load and preprocess the image
         image = Image.open(image_path).convert('RGB')
         image_tensor = self.transform(image).unsqueeze(0).to(self.device)
@@ -38,10 +48,11 @@ class BrainTumorPredictor:
         # Get predictions
         with torch.no_grad():
             outputs = self.model(image_tensor)
-            probs = F.softmax(outputs, dim=1)
+            logits = outputs.logits
+            probs = F.softmax(logits, dim=1)
             
             # Get predicted class
-            _, predicted = torch.max(outputs, 1)
+            _, predicted = torch.max(logits, 1)
             predicted_class = self.classes[predicted.item()]
             
             if return_probs:

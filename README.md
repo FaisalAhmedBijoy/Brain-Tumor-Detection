@@ -223,7 +223,24 @@ The model is evaluated using:
    - Recall
    - F1-Score
    - Per-class accuracy
+ ```bash
+                  precision    recall  f1-score   support
+
+         glioma       0.99      0.96      0.97       300
+     meningioma       0.96      0.96      0.96       306
+        notumor       0.97      1.00      0.98       405
+      pituitary       0.98      0.98      0.98       300
+
+      accuracy                            0.98      1311
+      macro avg       0.98      0.97      0.97      1311
+   weighted avg       0.98      0.98      0.98      1311
+
+ ```
+
 2. **Confusion Matrix**
+
+   ![](logs/confusion_matrix.png)
+
 3. **Overall Accuracy**
 
 ### Output and Artifacts

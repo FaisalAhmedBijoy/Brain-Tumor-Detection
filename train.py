@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from configuration import Config
 from data_processing import get_dataloaders
 from model import get_model
+from evaluations import evaluate_model
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print(f'Using device: {device}')
@@ -177,3 +178,6 @@ if __name__ == '__main__':
     
     train_model(model, train_loader, test_loader, device)
     print("Model training complete.")
+
+    result, cm = evaluate_model(model, test_loader, device, save_dir='results')
+    print("Model evaluation complete.")
