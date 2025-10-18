@@ -91,8 +91,4 @@ if __name__ == '__main__':
     model = get_model(device)
     print(model)
 
-    # load pretrained model test
-    save_path = 'checkpoints/test_model'
-    model.save_model(save_path)
-    loaded_model = BrainTumorViT.load_model(save_path, device)
-    print("Model loaded successfully from saved checkpoint")
+ 
