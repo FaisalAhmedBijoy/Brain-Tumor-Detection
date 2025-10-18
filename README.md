@@ -69,16 +69,17 @@ Brain-Tumor-Detection/
 ├── data_processing.py
 ├── model.py
 ├── train.py
-├── eval.py
-├── main.py
+├── evalutions.py
+├── inference.py
 ├── checkpoints/
+├── logs/
 └── results/
 ```
 
 ## Environment Setup
 
 ### Requirements
-- Python 3.8+
+- Python 3.10+
 - CUDA capable GPU (recommended)
 - 8GB RAM minimum
 - 10GB disk space for dataset and model checkpoints
@@ -115,7 +116,7 @@ conda install pytorch torchvision torchaudio cpuonly -c pytorch
 
 3. Install other dependencies:
 ```bash
-pip install transformers numpy pillow tqdm matplotlib scikit-learn seaborn
+pip install -r requirements.txt
 ```
 
 ### Data Preparation
@@ -150,7 +151,7 @@ data/
    ```bash
    python model.py
    ```
-   Model architecture of BrainTumorViT
+   Model architecture of `BrainTumorViT`
    ```bash
       BrainTumorViT(
          (vit): ViTForImageClassification(
@@ -299,13 +300,8 @@ The training process generates:
 1. **Model Checkpoints**:
    - Best model weights (`checkpoints/best_model/`)
    - Training state (`checkpoints/training_checkpoint.pth`)
-   
-2. **Visualizations**:
-   - Training/validation loss curves
-   - Accuracy progression
-   - Confusion matrix heatmap
 
-3. **Performance Reports**:
+2. **Performance Reports**:
    - Detailed classification metrics
    - Model predictions on test set
 
