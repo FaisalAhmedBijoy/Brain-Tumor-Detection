@@ -91,3 +91,10 @@ def get_dataloaders(data_dir, batch_size=32, num_workers=4):
     )
     
     return train_loader, test_loader
+
+if __name__ == '__main__':
+    # Example usage
+    data_dir = 'data'
+    train_loader, test_loader = get_dataloaders(data_dir)
+    print(f'Number of training samples: {len(train_loader.dataset)}')
+    print(f'Number of testing samples: {len(test_loader.dataset)}')

@@ -1,9 +1,14 @@
-import torch
-from torch import nn, optim
-from tqdm import tqdm
-import matplotlib.pyplot as plt
 import os
+import torch
+from tqdm import tqdm
+from torch import nn, optim
+import matplotlib.pyplot as plt
 from configuration import Config
+from data_processing import get_dataloaders
+from model import get_model
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+print(f'Using device: {device}')
 
 config = Config()
 
@@ -94,21 +99,25 @@ class Trainer:
             print(f'Train Loss: {train_loss:.4f} Train Acc: {train_acc:.2f}%')
             print(f'Test Loss: {test_loss:.4f} Test Acc: {test_acc:.2f}%')
             
-            # Save best model
+            # Save best model using the new save method
             if test_acc > best_acc:
                 best_acc = test_acc
-                torch.save(self.model.state_dict(), os.path.join(self.save_dir, 'best_model.pth'))
-            
-            # Save checkpoint
-            torch.save({
+                self.model.save_model(os.path.join(self.save_dir, 'best_model'))
+                
+            # Save checkpoint with additional training info
+            checkpoint = {
                 'epoch': epoch,
-                'model_state_dict': self.model.state_dict(),
                 'optimizer_state_dict': self.optimizer.state_dict(),
                 'train_loss': train_loss,
                 'test_loss': test_loss,
                 'train_acc': train_acc,
                 'test_acc': test_acc,
-            }, os.path.join(self.save_dir, 'checkpoint.pth'))
+                'train_losses': self.train_losses,
+                'test_losses': self.test_losses,
+                'train_accuracies': self.train_accuracies,
+                'test_accuracies': self.test_accuracies,
+            }
+            torch.save(checkpoint, os.path.join(self.save_dir, 'training_checkpoint.pth'))
         
         self.plot_training_history()
 
@@ -136,9 +145,7 @@ class Trainer:
         plt.close()
 
 def train_model(model, train_loader, test_loader, device):
-    """
-    Train the model with given configuration
-    """
+    """Train the model with given configuration"""
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.AdamW(model.parameters(), lr=config.LEARNING_RATE, weight_decay=config.WEIGHT_DECAY)
     
@@ -153,3 +160,20 @@ def train_model(model, train_loader, test_loader, device):
     )
     
     trainer.train(num_epochs=config.NUM_EPOCHS)
+
+if __name__ == '__main__':
+    
+    train_loader, test_loader = get_dataloaders(
+        data_dir=config.DATA_DIR,
+        batch_size=config.BATCH_SIZE,
+        num_workers=config.NUM_WORKERS
+    )
+
+    print("Data loaders created.")
+    print(f"Number of training samples: {len(train_loader.dataset)}")
+    print(f"Number of testing samples: {len(test_loader.dataset)}")
+    
+    model = get_model(device, pretrained=True)
+    
+    train_model(model, train_loader, test_loader, device)
+    print("Model training complete.")
