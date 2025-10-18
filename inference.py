@@ -69,7 +69,7 @@ if __name__ == "__main__":
     predictor = BrainTumorPredictor(model_dir)
     
     # Example: predict a single image
-    image_path = "data/Testing/glioma/Te-gl_0001.jpg"  # Example image path
+    image_path = "logs/samples/glioma/Te-gl_0011.jpg"  # Example image path
     if os.path.exists(image_path):
         predicted_class, probabilities = predictor.predict_image(image_path, return_probs=True)
         

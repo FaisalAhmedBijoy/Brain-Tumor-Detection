@@ -205,6 +205,9 @@ data/
    - Train the Vision Transformer model
    - Save the best model and checkpoints
    - Generate evaluation metrics and visualizations
+   
+   Training history:
+   ![](logs/training_history.png)
 
 ## Implementation Details
 
