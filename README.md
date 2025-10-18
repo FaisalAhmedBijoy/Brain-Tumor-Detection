@@ -150,6 +150,51 @@ data/
    ```bash
    python model.py
    ```
+   Model architecture of BrainTumorViT
+   ```bash
+      BrainTumorViT(
+      (vit): ViTForImageClassification(
+         (vit): ViTModel(
+            (embeddings): ViTEmbeddings(
+            (patch_embeddings): ViTPatchEmbeddings(
+               (projection): Conv2d(3, 768, kernel_size=(16, 16), stride=(16, 16))
+            )
+            (dropout): Dropout(p=0.0, inplace=False)
+            )
+            (encoder): ViTEncoder(
+            (layer): ModuleList(
+               (0-11): 12 x ViTLayer(
+                  (attention): ViTAttention(
+                  (attention): ViTSelfAttention(
+                     (query): Linear(in_features=768, out_features=768, bias=True)
+                     (key): Linear(in_features=768, out_features=768, bias=True)
+                     (value): Linear(in_features=768, out_features=768, bias=True)
+                  )
+                  (output): ViTSelfOutput(
+                     (dense): Linear(in_features=768, out_features=768, bias=True)
+                     (dropout): Dropout(p=0.0, inplace=False)
+                  )
+                  )
+                  (intermediate): ViTIntermediate(
+                  (dense): Linear(in_features=768, out_features=3072, bias=True)
+                  (intermediate_act_fn): GELUActivation()
+                  )
+                  (output): ViTOutput(
+                  (dense): Linear(in_features=3072, out_features=768, bias=True)
+                  (dropout): Dropout(p=0.0, inplace=False)
+                  )
+                  (layernorm_before): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                  (layernorm_after): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+               )
+            )
+            )
+            (layernorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+         )
+         (classifier): Linear(in_features=768, out_features=4, bias=True)
+      )
+   )
+   ```
+
 4. Train the model:
    ```bash
    python train.py
