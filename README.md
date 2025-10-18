@@ -31,18 +31,18 @@ The dataset was collected from [Kaggle](https://www.kaggle.com/datasets/masoudni
 ### Data Statistics
 ```
 Training Set:
-- Glioma: 826 images
-- Meningioma: 822 images
-- No Tumor: 395 images
-- Pituitary: 827 images
-Total: 2,870 images
+- Glioma: 1321 images
+- Meningioma: 1339 images
+- No Tumor: 1595 images
+- Pituitary: 1457 images
+Total: 5,712 images
 
 Testing Set:
-- Glioma: 100 images
-- Meningioma: 115 images
-- No Tumor: 105 images
-- Pituitary: 74 images
-Total: 394 images
+- Glioma: 300 images
+- Meningioma: 306 images
+- No Tumor: 405 images
+- Pituitary: 300 images
+Total: 1,311 images
 ```
 
 ### Sample Images
