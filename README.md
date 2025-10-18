@@ -325,6 +325,7 @@ print("Class probabilities:", result[1])
 Output Format: 
 ```
 Predicted class: glioma
+
 Class probabilities:
 glioma: 0.9950
 meningioma: 0.0012
